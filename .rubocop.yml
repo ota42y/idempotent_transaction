@@ -1,0 +1,16 @@
+inherit_gem:
+  fincop:
+    - 'config/rails.yml'
+    - 'config/rspec.yml'
+    - 'config/rubocop.yml'
+    # If you are using Rails 4, activate this cop.
+    # - 'config/disabled_for_rails_4.yml'
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.5
