@@ -130,7 +130,7 @@ end
 
 We use transaction so we rewrite this code like this. 
 
-```
+```ruby
 exec = IdempotentExecutor.new(user_id: user.id, type: :post_create, signature: 'abcdefg')
 
 ActiveRecord::Base.transaction do
