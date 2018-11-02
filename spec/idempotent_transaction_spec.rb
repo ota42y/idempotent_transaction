@@ -110,4 +110,12 @@ RSpec.describe IdempotentTransaction do
     expect(exec_2.finished?).to eq true
     expect(exec_2.executed?).to eq true
   end
+
+  it 'returns block result as is' do
+    exec_1 = IdempotentExecutor.new(user_id: 1, transaction_type: :post_create, signature: 'abcdefg')
+
+    block = proc { 'Block result' }
+
+    expect(exec_1.idempotent_transaction(&block)).to eq('Block result')
+  end
 end

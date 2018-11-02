@@ -25,16 +25,16 @@ module IdempotentTransaction
 
   def idempotent_transaction(force: false)
     self.class.transaction do
-      yield
+      yield.tap do
+        begin
+          save!
+        rescue ActiveRecord::RecordNotUnique
+          raise ActiveRecord::Rollback unless force
+        end
 
-      begin
-        save!
-      rescue ActiveRecord::RecordNotUnique
-        raise ActiveRecord::Rollback unless force
+        @finished = true
+        @executed = true
       end
-
-      @finished = true
-      @executed = true
     end
   end
 
